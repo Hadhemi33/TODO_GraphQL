@@ -1,0 +1,13 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Task {
+  id: Int!
+  desc: String!
+  checked: Boolean!
+}
+
+type Query {
+  getTasks: Task!
+}
