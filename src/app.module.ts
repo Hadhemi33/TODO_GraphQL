@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Task } from './models/Task';
+import { Task } from './graphql/models/Task';
+import { TaskResolver } from './tasks/TaskResolver';
 import { TasksModule } from './tasks/tasks.module';
-import { TaskResolver } from './tasks/Resolvers/TaskResolver';
 
 @Module({
   imports: [
+    TasksModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -19,15 +18,14 @@ import { TaskResolver } from './tasks/Resolvers/TaskResolver';
       database: 'task',
       entities: [Task],
       synchronize: true,
-      logging: true,
+      // logging: true,
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: 'src/schema.gql', // Permet à Apollo de générer automatiquement le schéma GraphQL
+      autoSchemaFile: 'src/schema.gql',
     }),
-    TasksModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, TaskResolver],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

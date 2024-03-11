@@ -8,8 +8,8 @@ import {
   Post,
 } from '@nestjs/common';
 import { CreateTaskDto } from 'src/dto/CreateTask.dto';
-import { TasksService } from 'src/tasks/services/tasks/tasks.service';
-import { CreateTaskParams } from 'src/utils/types';
+import { CreateTaskParams } from 'src/graphql/utils/types';
+import { TasksService } from 'src/tasks/TaskService';
 
 @Controller('tasks')
 export class TasksController {
@@ -25,7 +25,7 @@ export class TasksController {
   }
 
   @Delete(':id')
-  async deleteTaskById(@Param('id', ParseIntPipe) id: number) {
+  async deleteTaskById(@Param('id') id: number) {
     const deleted = await this.tasksService.deleteTask(id);
     return deleted;
   }

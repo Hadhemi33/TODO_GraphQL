@@ -9,5 +9,15 @@ type Task {
 }
 
 type Query {
-  getTasks: Task!
+  getTasks: [Task!]!
+}
+
+type Mutation {
+  createTask(createUserData: CreateTaskInput!): Task!
+  deleteTask(id: Float!): Task!
+}
+
+input CreateTaskInput {
+  desc: String!
+  checked: Boolean
 }
