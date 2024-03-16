@@ -7,3 +7,10 @@ export class CreateTaskInput {
   @Field({ nullable: true })
   checked: boolean;
 }
+@InputType()
+export class UpdateTaskInput {
+  @Field()
+  desc: string;
+  @Field(() => Boolean)
+  checked: boolean;
+}
